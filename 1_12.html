@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora 1.0</title>
+  <style>
+    body {
+      background-color: rgb(238, 28, 28)45));
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: hsl(0, 17%, 98%);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(7, 7, 7, 0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, td {
+      border: 1px solid #0e0d0d;
+    }
+
+    td {
+      text-align: center;
+      padding: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #050505;
+      color: #fdfdfd;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h2>Calculadora</h2>
+    <table>
+      <tr>
+        <td colspan="4"><input type="text" id="display" disabled></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendCharacter('7')">7</button></td>
+        <td><button onclick="appendCharacter('8')">8</button></td>
+        <td><button onclick="appendCharacter('9')">9</button></td>
+        <td><button onclick="appendCharacter('+')">+</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendCharacter('4')">4</button></td>
+        <td><button onclick="appendCharacter('5')">5</button></td>
+        <td><button onclick="appendCharacter('6')">6</button></td>
+        <td><button onclick="appendCharacter('-')">-</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendCharacter('1')">1</button></td>
+        <td><button onclick="appendCharacter('2')">2</button></td>
+        <td><button onclick="appendCharacter('3')">3</button></td>
+        <td><button onclick="appendCharacter('*')">*</button></td>
+      </tr>
+      <tr>
+        <td><button onclick="appendCharacter('0')">0</button></td>
+        <td><button onclick="clearDisplay()">C</button></td>
+        <td><button onclick="calculateResult()">=</button></td>
+        <td><button onclick="appendCharacter('/')">/</button></td>
+      </tr>
+    </table>
+    <button onclick="clearDisplay()">Limpar</button>
+  </main>
+
+  <script>
+    let currentExpression = '';
+
+    function appendCharacter(character) {
+      currentExpression += character;
+      updateDisplay();
+    }
+
+    function calculateResult() {
+      try {
+        const result = eval(currentExpression);
+        currentExpression = result.toString();
+        updateDisplay();
+      } catch (error) {
+        currentExpression = 'Error';
+        updateDisplay();
+      }
+    }
+
+    function clearDisplay() {
+      currentExpression = '';
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('display').value = currentExpression;
+    }
+  </script>
+</body>
+</html>
